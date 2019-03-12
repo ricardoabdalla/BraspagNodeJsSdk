@@ -1,0 +1,27 @@
+{
+  "name": "braspag-nodejs-sdk",
+  "version": "",
+  "description": "SDK para integração com plataforma Braspag",
+  "main": "",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "authors": [
+    {
+      "name": "Ricardo Abdalla",
+      "email": "rabdalla@braspag.com.br"
+    },
+    {
+      "name": "Maurici Ferreira Junior",
+      "email": "mjunior@braspag.com.br"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jest": "^24.4.0"
+  }
+}
