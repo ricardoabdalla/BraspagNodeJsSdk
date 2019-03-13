@@ -1,5 +1,4 @@
 const Endpoints = require('../Common/Endpoints');
-const Environment = require('../Common/Environments');
 const axios = require('axios');
 
 module.exports = class BraspagAuthClient {
