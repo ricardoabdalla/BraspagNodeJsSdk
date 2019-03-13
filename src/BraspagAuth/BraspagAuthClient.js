@@ -11,6 +11,8 @@ module.exports = class BraspagAuthClient {
     }
 
     async createAccessToken(request) {
+    console.log("isEmpty " + isEmpty);
+
         if (isEmpty(request))
             throw new Error("Request is null");
 

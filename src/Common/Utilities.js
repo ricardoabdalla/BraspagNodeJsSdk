@@ -1,4 +1,6 @@
-module.exports = function isEmpty(val) {
+
+module.exports = {
+    isEmpty: (val) => {
     let typeOfVal = typeof val;
     switch(typeOfVal){
         case 'object':
@@ -13,5 +15,4 @@ module.exports = function isEmpty(val) {
             break;
         default:
             return val == '' || val == undefined;
-    }
-};
+}}};
