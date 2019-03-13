@@ -1,4 +1,5 @@
 const Endpoints = require('../Common/Endpoints');
+const isEmpty = require('../Common/Utilities').isEmpty;
 const axios = require('axios');
 
 module.exports = class BraspagAuthClient {
@@ -10,19 +11,19 @@ module.exports = class BraspagAuthClient {
     }
 
     async createAccessToken(request) {
-        if (typeof request === 'undefined' || request === null)
+        if (isEmpty(request))
             throw new Error("Request is null");
 
-        if (typeof request.clientId === 'undefined' || request.clientId === null)
-            throw new Error("Invalid credentials: ClientId is null or empty");
+        if (isEmpty(request.clientId))
+            throw new Error("Invalid credentials: ClientId is null");
 
-        if (typeof request.clientSecret === 'undefined' || request.clientSecret === null)
-            throw new Error("Invalid credentials: ClientSecret is null or empty");
+        if (isEmpty(request.clientSecret))
+            throw new Error("Invalid credentials: ClientSecret is null");
 
         let headers = {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'cache-control': 'no-cache'
-            };
+        };
 
         let auth = {
             username: request.clientId,
