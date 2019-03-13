@@ -11,8 +11,6 @@ module.exports = class BraspagAuthClient {
     }
 
     async createAccessToken(request) {
-    console.log("isEmpty " + isEmpty);
-
         if (isEmpty(request))
             throw new Error("Request is null");
 
@@ -37,11 +35,11 @@ module.exports = class BraspagAuthClient {
         await axios.post(`${this.url}oauth2/token`, 'grant_type=client_credentials', {headers, auth})
             .then(res => {
                 response = res.data;
-                response.status = res.status;
+                response.httpStatus = res.status;
             })
             .catch(error => {
                 response = error.response.data;
-                response.status = error.response.status;
+                response.httpStatus = error.response.status;
             })
 
         return response;

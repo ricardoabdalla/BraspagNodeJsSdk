@@ -10,7 +10,7 @@ describe('BraspagAuthTests', function() {
         scope: 'VelocityApp'
       });
       expect(response.access_token).not.toBeNull();
-      expect(response.status).toBe(200);
+      expect(response.httpStatus).toBe(200);
     });
 
     it('createAccessTokenAsync_whenClientIdIsInvalid_returnsInvalidClientError', async function() {
@@ -22,7 +22,7 @@ describe('BraspagAuthTests', function() {
         scope: 'VelocityApp'
       });
       expect(response.error).toBe('invalid_client');
-      expect(response.status).toBe(400);
+      expect(response.httpStatus).toBe(400);
     });
 
     it('createAccessTokenAsync_whenClientSecretIsInvalid_returnsInvalidClientError', async function() {
@@ -34,6 +34,6 @@ describe('BraspagAuthTests', function() {
         scope: 'VelocityApp'
       });
       expect(response.error).toBe('invalid_client');
-      expect(response.status).toBe(400);
+      expect(response.httpStatus).toBe(400);
     });
   });
