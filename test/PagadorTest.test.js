@@ -65,6 +65,23 @@ describe('PagadorTests', () => {
         expect(response.httpStatus).toBe(201);
     });
 
+    it('createSale_InvalidCredentials_returns401', async () => {
+        const client = new PagadorClient({
+            env: 'sandbox',
+            credentials: {
+                    MerchantId: '99999999-9999-9999-9999-999999999999', 
+                    MerchantKey: '9999999999999999999999999999999999999999'
+            }});
+
+        let request = requestDataSet();
+        
+        request.MerchantOrderId = uuid();
+            
+        let response = await client.createSale(request);
+
+        expect(response.httpStatus).toBe(401);
+    });
+
     it('createSale_forValidCreditCardWithAutomaticCapture_returnsPaymentConfirmed', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
