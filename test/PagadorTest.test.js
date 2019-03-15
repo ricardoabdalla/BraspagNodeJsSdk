@@ -303,13 +303,7 @@ describe('PagadorTests', () => {
         request.Payment.Demonstrative = "Texto demonstrativo";
         request.Payment.Identification = "11017523000167";
         request.Payment.Instructions = "Aceitar somente até a data de vencimento.";
-
-        var today = new Date();
-        var day;
-        if (today.getDate() < 10) day = "0" + today.getDate();
-        else day = today.getDate();
-        var months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-        request.Payment.ExpirationDate = today.getFullYear() + "-" + months[today.getMonth()] + "-" + day;
+        request.Payment.ExpirationDate = new Date().toISOString().slice(0, 10)
 
         let response = await client.createSale(request);
 
