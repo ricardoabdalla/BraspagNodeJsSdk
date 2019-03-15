@@ -1,5 +1,4 @@
 const Endpoints = require('../Common/Endpoints');
-const isEmpty = require('../Common/Utilities').isEmpty;
 const axios = require('axios');
 const uuid = require('uuid/v1');
 
@@ -17,16 +16,16 @@ module.exports = class PagadorClient {
     }
 
     async createSale(request, credentials = {}) {
-        if (isEmpty(request))
+        if (typeof request === 'undefined' || request === null)
             throw new Error("Sale request is null");
 
-        if (isEmpty(credentials) && isEmpty(this.credentials))
+        if (typeof credentials === 'undefined' || credentials === null && typeof this.credentials === 'undefined' || this.credentials === null)
             throw new Error("Credentials are null");
 
-        if (isEmpty(credentials.MerchantId) && isEmpty(this.credentials.MerchantId))
+        if (typeof credentials.MerchantId === 'undefined' || credentials.MerchantId === null && typeof this.credentials.MerchantId === 'undefined' || this.credentials.MerchantId === null)
             throw new Error("Invalid credentials: MerchantId is null");
 
-        if (isEmpty(credentials.MerchantKey) && isEmpty(this.credentials.MerchantKey))
+        if (typeof credentials.MerchantKey === 'undefined' || credentials.MerchantKey === null && typeof this.credentials.MerchantKey === 'undefined' || this.credentials.MerchantKey === null)
             throw new Error("Invalid credentials: MerchantKey is null");
 
         let currentCredentials = {
@@ -34,8 +33,8 @@ module.exports = class PagadorClient {
             MerchantKey: ''
         };
 
-        if (!isEmpty(credentials)) currentCredentials = credentials;
-        else currentCredentials = this.credentials;
+        if (typeof credentials === 'undefined' || credentials === null) currentCredentials = this.credentials;
+        else currentCredentials = credentials;
 
         let headers = {
             'Content-Type': 'application/json',
