@@ -48,12 +48,10 @@ module.exports = class PagadorClient {
 
         await axios.post(`${this.url}v2/sales`, request, {headers})
             .then(res => {
-                response = res.data;
-                response.httpStatus = res.status;
+                response = {httpStatus: res.status, ...res.data}
             })
             .catch(error => {
-                response = error.response.data;
-                response.httpStatus = error.response.status;
+                response = {httpStatus: error.response.status, ...error.response}
             })
             
         return response;
