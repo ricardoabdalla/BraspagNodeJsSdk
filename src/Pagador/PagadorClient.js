@@ -15,26 +15,26 @@ module.exports = class PagadorClient {
             this.url = Endpoints.PagadorApiSandbox;
     }
 
-    async createSale(request, credentials = {}) {
+    async createSale(request, credentials = null) {
         if (typeof request === 'undefined' || request === null)
             throw new Error("Sale request is null");
 
-        if (typeof credentials === 'undefined' || credentials === null && typeof this.credentials === 'undefined' || this.credentials === null)
+        if ((typeof this.credentials === 'undefined' || this.credentials === null) && (typeof credentials === 'undefined' || credentials === null))
             throw new Error("Credentials are null");
 
-        if (typeof credentials.MerchantId === 'undefined' || credentials.MerchantId === null && typeof this.credentials.MerchantId === 'undefined' || this.credentials.MerchantId === null)
-            throw new Error("Invalid credentials: MerchantId is null");
+        if ((typeof this.credentials.MerchantId === 'undefined' || this.credentials.MerchantId === null) && (typeof credentials.MerchantId === 'undefined' || credentials.MerchantId === null))
+            throw new Error("MerchantId is null");
 
-        if (typeof credentials.MerchantKey === 'undefined' || credentials.MerchantKey === null && typeof this.credentials.MerchantKey === 'undefined' || this.credentials.MerchantKey === null)
-            throw new Error("Invalid credentials: MerchantKey is null");
+        if ((typeof this.credentials.MerchantKey === 'undefined' || this.credentials.MerchantKey === null) && (typeof credentials.MerchantKey === 'undefined' || credentials.MerchantKey === null))
+            throw new Error("MerchantId is null");
 
         let currentCredentials = {
             MerchantId: '',
             MerchantKey: ''
         };
 
-        if (typeof credentials === 'undefined' || credentials === null) currentCredentials = this.credentials;
-        else currentCredentials = credentials;
+        if (credentials !== null) currentCredentials = credentials;
+        else currentCredentials = this.credentials;
 
         let headers = {
             'Content-Type': 'application/json',
