@@ -47,6 +47,8 @@ describe('PagadorTests', () => {
 
     //#region createSale
 
+    jest.setTimeout(30000);
+
     it('createSale_forValidCredentials_returnsAuthorized', async () => {
         const client = new PagadorClient({
             env: 'sandbox',

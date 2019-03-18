@@ -1,6 +1,9 @@
 const BraspagAuthClient = require('../src/BraspagAuth/BraspagAuthClient');
 
 describe('BraspagAuthTests', () => {
+
+    jest.setTimeout(30000);
+    
     it('createAccessToken_forValidCredentials_returnsAccessToken', async () => {
       const client = new BraspagAuthClient({env: 'sandbox'});
       let response = await client.createAccessToken({
