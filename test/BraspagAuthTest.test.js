@@ -3,7 +3,7 @@ const BraspagAuthClient = require('../src/BraspagAuth/BraspagAuthClient');
 describe('BraspagAuthTests', () => {
 
     jest.setTimeout(30000);
-    
+
     it('createAccessToken_forValidCredentials_returnsAccessToken', async () => {
       const client = new BraspagAuthClient({env: 'sandbox'});
       let response = await client.createAccessToken({
@@ -16,7 +16,7 @@ describe('BraspagAuthTests', () => {
       expect(response.httpStatus).toBe(200);
     });
 
-    it('createAccessTokenAsync_whenClientIdIsInvalid_returnsInvalidClientError', async () => {
+    it('createAccessToken_whenClientIdIsInvalid_returnsInvalidClientError', async () => {
       const client = new BraspagAuthClient({env: 'sandbox'});
       let response = await client.createAccessToken({
         clientId: '99999999-9999-9999-9999-999999999999',
@@ -28,7 +28,7 @@ describe('BraspagAuthTests', () => {
       expect(response.httpStatus).toBe(400);
     });
 
-    it('createAccessTokenAsync_whenClientSecretIsInvalid_returnsInvalidClientError', async () => {
+    it('createAccessToken_whenClientSecretIsInvalid_returnsInvalidClientError', async () => {
       const client = new BraspagAuthClient({env: 'sandbox'});
       let response = await client.createAccessToken({
         clientId: '5d85902e-592a-44a9-80bb-bdda74d51bce',

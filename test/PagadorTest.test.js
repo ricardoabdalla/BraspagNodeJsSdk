@@ -143,7 +143,7 @@ describe('PagadorTests', () => {
         expect(response.httpStatus).toBe(201);
     });
 
-    it('CreateSaleAsync_WithAvsAnalysis_ReturnsAuthorized', async () => {
+    it('CreateSale_WithAvsAnalysis_ReturnsAuthorized', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -173,7 +173,7 @@ describe('PagadorTests', () => {
         expect(response.Payment.CreditCard.Avs.Status).toBe(3);
     });
 
-    it('CreateSaleAsync_WithExternalAuthentication_ReturnsAuthorized', async () => {
+    it('CreateSale_WithExternalAuthentication_ReturnsAuthorized', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -201,7 +201,7 @@ describe('PagadorTests', () => {
         expect(response.Payment.ExternalAuthentication.Xid).toBe('dnFoU3R4amdpWTJJdzJRVHNhNDZ');
     });
 
-    it('CreateSaleAsync_WithAuthentication_ReturnsNotFinished', async () => {
+    it('CreateSale_WithAuthentication_ReturnsNotFinished', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -224,7 +224,7 @@ describe('PagadorTests', () => {
         expect(response.Payment.ReturnUrl).toBe(request.Payment.ReturnUrl);
     });
 
-    it('CreateSaleAsync_WhenCardSaveIsTrue_ReturnsAuthorized', async () => {
+    it('CreateSale_WhenCardSaveIsTrue_ReturnsAuthorized', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -245,7 +245,7 @@ describe('PagadorTests', () => {
         expect(response.Payment.CreditCard.CardToken).not.toBeNull();
     });
 
-    it('CreateSaleAsync_UsingCardToken_ReturnsAuthorized', async () => {
+    it('CreateSale_UsingCardToken_ReturnsAuthorized', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -272,7 +272,7 @@ describe('PagadorTests', () => {
         expect(response.Payment.CreditCard.CardToken).not.toBeNull();
     });
 
-    it('CreateSaleAsync_UsingDebitCard_ReturnsNotFinished', async () => {
+    it('CreateSale_UsingDebitCard_ReturnsNotFinished', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -303,7 +303,7 @@ describe('PagadorTests', () => {
         expect(response.Payment.DebitCard).not.toBeNull();
     });
 
-    it('CreateSaleAsync_UsingRegisteredBoleto_ReturnsAuthorized', async () => {
+    it('CreateSale_UsingRegisteredBoleto_ReturnsAuthorized', async () => {
         const client = new PagadorClient({
             env: 'sandbox',
             credentials: {
