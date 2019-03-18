@@ -44,7 +44,6 @@ var requestDataSet = () => {
 };
 
 describe('PagadorTests', () => {
-
     //#region createSale
 
     jest.setTimeout(30000);
@@ -338,6 +337,85 @@ describe('PagadorTests', () => {
         expect(response.Payment.Identification).not.toBeNull();
         expect(response.Payment.Instructions).not.toBeNull();
         expect(response.Payment.Url).not.toBeNull();
+    });
+
+    it('CreateSale_UsingRecurrentPayment_ReturnsAuthorized', async () => {
+        const client = new PagadorClient({
+            env: 'sandbox',
+            credentials: {
+                MerchantId: '33B6AC07-C48D-4F13-A5B9-D3516A378A0C', 
+                MerchantKey: 'd6Rb3OParKvLfzNrURzwcT0f1lzNazS1o19yP6Y8'
+        }});
+
+        let request = requestDataSet();
+
+        request.MerchantOrderId = uuid();
+
+        var threeMonthsLater = new Date();
+        threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
+
+        request.Payment.RecurrentPayment = {
+            AuthorizeNow: true,
+            EndDate: threeMonthsLater.toISOString().slice(0, 10),
+            Interval: 'Monthly'
+        };
+
+        let response = await client.createSale(request);
+
+        expect(response.Payment.Status).toBe(TransactionStatus.Authorized);
+        expect(response.httpStatus).toBe(201);
+        expect(response.Payment.DebitCard).not.toBeNull();
+    });
+
+    //#endregion
+
+    //#region MultiStep_Tests
+
+    it('createSale_ThenCapture_ThenVoid_ThenGet', async () => {
+        
+        const client = new PagadorClient({
+            env: 'sandbox',
+            credentials: {
+                    MerchantId: '33B6AC07-C48D-4F13-A5B9-D3516A378A0C', 
+                    MerchantKey: 'd6Rb3OParKvLfzNrURzwcT0f1lzNazS1o19yP6Y8'
+            }});
+
+        let request = requestDataSet();
+        
+        request.MerchantOrderId = uuid();
+            
+        let response = await client.createSale(request);
+
+        expect(response.Payment.Status).toBe(TransactionStatus.Authorized);
+        expect(response.httpStatus).toBe(201);
+
+        let captureRequest = {
+            PaymentId: response.Payment.PaymentId,
+            Amount: response.Payment.Amount
+        };
+
+        let captureResponse = await client.capture(captureRequest);
+
+        expect(captureResponse.Status).toBe(TransactionStatus.PaymentConfirmed);
+        expect(captureResponse.httpStatus).toBe(200);
+
+        let voidRequest = {
+            PaymentId: response.Payment.PaymentId,
+            Amount: response.Payment.Amount
+        };
+
+        let voidResponse = await client.void(voidRequest);
+
+        expect(voidResponse.Status).toBe(TransactionStatus.Voided);
+        expect(voidResponse.httpStatus).toBe(200);
+
+        let getResponse = await client.getOrderById(response.Payment.PaymentId);
+
+        expect(getResponse.Payment.Status).toBe(TransactionStatus.Voided);
+        expect(getResponse.httpStatus).toBe(200);
+        expect(getResponse.MerchantOrderId).not.toBeNull();
+        expect(getResponse.Customer).not.toBeNull();
+        expect(getResponse.Payment).not.toBeNull();
     });
 
     //#endregion
