@@ -1,17 +1,18 @@
 const Endpoints = require("../Common/Endpoints");
 const axios = require('axios');
+const adapter = require('axios/lib/adapters/http');
+var parseString = require('xml2js').parseString;
 const uuid = require('uuid/v1');
-
-// for postman copy method
-var request = require("request");
 
 module.exports = class VelocityClient {
     constructor(options) {
+        axios.defaults.adapter = adapter;
+
         this.credentials = {
             MerchantKey: options.credentials.MerchantKey,
         };
 
-        if (options.env == 'production')
+        if (options.env === 'production')
         {
             this.url = Endpoints.CartaoProtegidoProduction;
         }
@@ -22,6 +23,8 @@ module.exports = class VelocityClient {
     }
 
     async getCreditCard(request, credentials = null) {
+
+
         if (typeof request === 'undefined' || request === null)
             throw new Error("Request is null");
 
@@ -37,12 +40,6 @@ module.exports = class VelocityClient {
 
         if (credentials !== null) currentCredentials = credentials;
         else currentCredentials = this.credentials;
-    
-        let headers = {
-            'Content-Type': 'text/xml',
-            'cache-control': 'no-cache',
-            'X-Requested-With': 'XMLHttpRequest'
-        };
 
         let body = 
             `<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -60,16 +57,22 @@ module.exports = class VelocityClient {
 
         var response;
 
-        await axios.post(`${this.url}v2/cartaoprotegido.asmx`, body, {headers})
+        await axios.post(`${this.url}v2/cartaoprotegido.asmx`, body, {headers: {'Content-Type': 'text/xml'}})
             .then(res => {
-                console.log(res);
-                response = {httpStatus: res.status, ...res.data}
+                parseString(res.data, function (err, result) {
+                    let json = {...result['soap:Envelope']['soap:Body'][0]['GetCreditCardResponse'][0]['GetCreditCardResult']}[0];
+                    if (json.Success[0] === "true")
+                        response = {httpStatus: res.status,  Success: json.Success[0], CorrelationId: json.CorrelationId[0], CardHolder: json.CardHolder[0], CardNumber: json.CardNumber[0], CardExpiration: json.CardExpiration[0], MaskedCardNumber: json.MaskedCardNumber[0]};
+                    else
+                        response = {httpStatus: res.status,  Success: json.Success[0], CorrelationId: json.CorrelationId[0], ErrorReportCollection: {...json.ErrorReportCollection}};
+                    console.log(response);
+                });
             })
             .catch(error => {
                 console.log(error);
                 response = {httpStatus: error.response.status, ...error.response}
-            })
-            
+            });
+
         return response;
     }
-}
+};
