@@ -5,6 +5,7 @@ const uuid = require('uuid/v1');
 
 var requestDataSet = () => {
     var request = {
+        MerchantOrderId: uuid(),
         Customer: {
             Name: 'Bjorn Ironside',
             Identity: '762.502.520-96',
@@ -59,8 +60,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-            
         let response = await client.createSale(request);
 
         expect(response.Payment.Status).toBe(TransactionStatus.Authorized);
@@ -77,8 +76,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-            
         let response = await client.createSale(request);
 
         expect(response.httpStatus).toBe(401);
@@ -94,7 +91,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
         request.Payment.Capture = true;
             
         let response = await client.createSale(request);
@@ -112,8 +108,6 @@ describe('PagadorTests', () => {
         }});
 
         let request = requestDataSet();
-
-        request.MerchantOrderId = uuid();
 
         request.Customer.Address = {
             Street: 'Alameda Xingu',
@@ -153,8 +147,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
 
-        request.MerchantOrderId = uuid();
-
         request.Payment.CreditCard.Avs = {
             Street: 'Alameda Xingu',
             Number: '512',
@@ -183,8 +175,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
 
-        request.MerchantOrderId = uuid();
-
         request.Payment.ExternalAuthentication = {
             Cavv: 'AABBBlCIIgAAAAARJIgiEL0gDoE=',
             Eci: '5',
@@ -211,8 +201,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
 
-        request.MerchantOrderId = uuid();
-
         request.Payment.Authenticate = true;
         request.Payment.ReturnUrl = "http://www.test.com/redirect";
 
@@ -234,8 +222,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
 
-        request.MerchantOrderId = uuid();
-
         request.Payment.CreditCard.SaveCard = true;
 
         let response = await client.createSale(request);
@@ -254,8 +240,6 @@ describe('PagadorTests', () => {
         }});
 
         let request = requestDataSet();
-
-        request.MerchantOrderId = uuid();
 
         request.Payment.CreditCard = {
             Holder: null,
@@ -281,8 +265,6 @@ describe('PagadorTests', () => {
         }});
 
         let request = requestDataSet();
-
-        request.MerchantOrderId = uuid();
 
         request.Payment.Type = "DebitCard";
         request.Payment.CreditCard = null;
@@ -312,8 +294,6 @@ describe('PagadorTests', () => {
         }});
 
         let request = requestDataSet();
-
-        request.MerchantOrderId = uuid();
 
         request.Payment.Type = "Boleto";
         request.Payment.CreditCard = null;
@@ -350,8 +330,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
 
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 
@@ -382,8 +360,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-            
         let response = await client.createSale(request);
 
         expect(response.Payment.Status).toBe(TransactionStatus.Authorized);
@@ -428,8 +404,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-            
         let response = await client.createSale(request);
 
         expect(response.Payment.Status).toBe(TransactionStatus.Authorized);
@@ -457,8 +431,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 
@@ -489,8 +461,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 
@@ -528,8 +498,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 
@@ -564,8 +532,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 
@@ -600,8 +566,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 
@@ -636,8 +600,6 @@ describe('PagadorTests', () => {
 
         let request = requestDataSet();
         
-        request.MerchantOrderId = uuid();
-
         var threeMonthsLater = new Date();
         threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
 

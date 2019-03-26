@@ -25,5 +25,5 @@ describe('CartaoProtegidoTests', () => {
         expect(response.CardExpiration).toBe('06/2020');
         expect(response.CardHolder).toBe('TESTE TESTETESTE');
         expect(response.CorrelationId).toBe(requestId);
-    })
+    });
 });
