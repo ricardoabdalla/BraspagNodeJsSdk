@@ -1,15 +1,18 @@
 const Endpoints = require("../Common/Endpoints");
 const axios = require('axios');
+const adapter = require('axios/lib/adapters/http');
 const uuid = require('uuid/v1');
 
 module.exports = class VelocityClient {
     constructor(options) {
+        axios.defaults.adapter = adapter;
+
         this.credentials = {
             MerchantId: options.credentials.MerchantId,
             AccessToken: options.credentials.AccessToken
         };
 
-        if (options.env == 'production')
+        if (options.env === 'production')
         {
             this.url = Endpoints.VelocityApiProduction;
         }
@@ -50,15 +53,15 @@ module.exports = class VelocityClient {
 
         var response;
 
-        await axios.post(`${this.url}analysis/v2/`, request, {headers, withCredentials: false})
+        await axios.post(`${this.url}analysis/v2/`, request, {headers})
             .then(res => {
                 response = {httpStatus: res.status, ...res.data}
             })
             .catch(error => {
                 console.log(error);
                 response = {httpStatus: error.response.status, ...error.response}
-            })
+            });
             
         return response;
     }
-}
+};

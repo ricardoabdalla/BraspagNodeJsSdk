@@ -3,6 +3,9 @@ const BraspagAuthClient = require("../src/BraspagAuth/BraspagAuthClient");
 const uuid = require('uuid/v1');
 
 var requestDataSet = () => {
+    var oneDayAfter = new Date();
+    oneDayAfter.setDate(oneDayAfter.getDate() + 1);
+
     var request = {
         Customer: {
             Name: 'Bjorn Ironside',
@@ -30,7 +33,7 @@ var requestDataSet = () => {
         },
         Transaction: {
             OrderId: uuid(),
-            Date: new Date().toISOString().slice(0, 10),
+            Date: oneDayAfter.toISOString().slice(0, 10),
             Amount: 1000,
         },
         Card: {
@@ -57,6 +60,7 @@ describe('VelocityTests', () => {
             grantType: 'client_credentials',
             scope: 'VelocityApp'
         });
+
         expect(authResponse.access_token).not.toBeNull();
         expect(authResponse.httpStatus).toBe(200);
 
@@ -68,7 +72,7 @@ describe('VelocityTests', () => {
             }});
 
         let request = requestDataSet();
-        
+
         let response = await client.performAnalysis(request);
 
         expect(response.httpStatus).toBe(201);
@@ -76,7 +80,7 @@ describe('VelocityTests', () => {
         expect(response.AnalysisResult.Status).toBe("Reject");
         expect(response.Transaction).not.toBeNull();
         expect(response.RequestId).not.toBeNull();
-        expect(response.ErrorDataCollection).toBeNull();
+        expect(typeof response.ErrorDataCollection).toBe('undefined');
     });
 
     it('performAnalysis_forInvalidRequest_returnsBadRequest', async () => {
@@ -104,9 +108,9 @@ describe('VelocityTests', () => {
         let response = await client.performAnalysis(request);
 
         expect(response.httpStatus).toBe(400);
-        expect(response.AnalysisResult).toBeNull();
-        expect(response.Transaction).toBeNull();
-        expect(response.RequestId).toBeNull();
+        expect(typeof response.AnalysisResult).toBe('undefined');
+        expect(typeof response.Transaction).toBe('undefined');
+        expect(typeof response.RequestId).toBe('undefined');
         expect(response.ErrorDataCollection).not.toBeNull();
     });
 
@@ -137,6 +141,6 @@ describe('VelocityTests', () => {
         expect(response.AnalysisResult.Status).toBe("Reject");
         expect(response.Transaction).not.toBeNull();
         expect(response.RequestId).not.toBeNull();
-        expect(response.ErrorDataCollection).toBeNull();
+        expect(typeof response.ErrorDataCollection).toBe('undefined');
     });
 });
