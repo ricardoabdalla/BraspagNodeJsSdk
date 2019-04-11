@@ -1,4 +1,4 @@
-const BraspagAuthClient = require('../src/BraspagAuth/BraspagAuthClient');
+const BraspagAuthClient = require('../src/BraspagAuthClient');
 
 describe('BraspagAuthTests', () => {
 

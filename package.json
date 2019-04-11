@@ -1,8 +1,12 @@
 {
   "name": "braspag-nodejs-sdk",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "SDK para integração com plataforma Braspag",
   "main": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricardoabdalla/BraspagNodeJsSdk.git"
+  },
   "directories": {
     "test": "test"
   },
@@ -19,7 +23,14 @@
       "email": "mjunior@braspag.com.br"
     }
   ],
+  "homepage": "https://github.com/ricardoabdalla/BraspagNodeJsSdk",
+  "keywords": [
+    "braspag",
+    "node",
+    "payments"
+  ],
   "license": "MIT",
+  "deprecated": false,
   "dependencies": {
     "axios": "^0.18.0",
     "jest": "^24.4.0",
