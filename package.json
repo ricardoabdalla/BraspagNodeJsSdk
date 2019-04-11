@@ -1,6 +1,6 @@
 {
   "name": "braspag-nodejs-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "SDK para integração com plataforma Braspag",
   "main": "",
   "directories": {
