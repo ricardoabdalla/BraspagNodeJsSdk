@@ -1,5 +1,5 @@
-const VelocityClient = require("../src/Velocity/VelocityClient");
-const BraspagAuthClient = require("../src/BraspagAuth/BraspagAuthClient");
+const VelocityClient = require("../src/VelocityClient");
+const BraspagAuthClient = require("../src/BraspagAuthClient");
 const uuid = require('uuid/v1');
 
 var requestDataSet = () => {

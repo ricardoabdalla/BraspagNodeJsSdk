@@ -1,4 +1,4 @@
-const PagadorClient = require('../src/Pagador/PagadorClient');
+const PagadorClient = require('../src/PagadorClient');
 const TransactionStatus = require('../src/Common/TransactionsStatus');
 const RecurrencyInterval = require('../src/Common/RecurrencyInterval');
 const uuid = require('uuid/v1');
