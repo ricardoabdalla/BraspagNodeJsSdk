@@ -1,6 +1,6 @@
 {
   "name": "braspag-nodejs-sdk",
-  "version": "",
+  "version": "1.0.1",
   "description": "SDK para integração com plataforma Braspag",
   "main": "",
   "directories": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "jest": "^24.4.0",
+    "moment": "^2.24.0",
     "uuid": "^3.3.2",
     "xml2js": "^0.4.19"
   }

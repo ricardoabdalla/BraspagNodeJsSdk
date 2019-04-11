@@ -43,7 +43,7 @@ describe('CartaoProtegidoTests', () => {
         });
 
         expect(response.httpStatus).toBe(200);
-        expect(response.ErrorDataCollection).not.toBeNull();
+        expect(typeof response.ErrorDataCollection).not.toBe('undefined');
     });
 
     it('getCreditCard_forNullToken_returnsInternalServerError', async () => {
