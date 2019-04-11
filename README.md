@@ -35,7 +35,8 @@ Caso já possua um arquivo `package.json`, adicione a seguinte dependência ao s
 
 ```
 "dependencies": {
-    "braspag-nodejs-sdk": "*",
+    "braspag-nodejs-sdk": "*"
+}
 ```
 
 Com a dependência adicionada ao `package.json`, execute o comando:
@@ -242,6 +243,8 @@ Análise de uma transação com o Velocity:
 
 ```javascript
 /* Criação do Token de Acesso OAUTH via Braspag Auth */
+const BraspagAuthClient = require('braspag-nodejs-sdk').BraspagAuthClient;
+
 const authClient = new BraspagAuthClient({env: 'sandbox'});
 let authResponse = await authClient.createAccessToken({
     clientId: 'CLIENT_ID',

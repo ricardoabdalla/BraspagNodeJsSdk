@@ -1,8 +1,11 @@
-const Endpoints = require('../Common/Endpoints');
+const Endpoints = require('./Common/Endpoints');
 const axios = require('axios');
+const adapter = require('axios/lib/adapters/http');
 
 module.exports = class BraspagAuthClient {
     constructor(options) {
+        axios.defaults.adapter = adapter;
+
         if (options.env == 'production')
             this.url = Endpoints.BraspagAuthProduction;
         else
@@ -29,18 +32,16 @@ module.exports = class BraspagAuthClient {
             password: request.clientSecret
         };
 
-        var response;
+        var response = null;
 
         await axios.post(`${this.url}oauth2/token`, 'grant_type=client_credentials', {headers, auth})
             .then(res => {
-                response = res.data;
-                response.httpStatus = res.status;
+                response = { httpStatus: res.status, ...res.data };
             })
             .catch(error => {
-                response = error.response.data;
-                response.httpStatus = error.response.status;
-            })
+                response = { httpStatus: error.response.status, ...error.response.data };
+            });
 
         return response;
     };
-}
+};

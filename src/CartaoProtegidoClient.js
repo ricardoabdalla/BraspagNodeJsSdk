@@ -1,4 +1,4 @@
-const Endpoints = require("../Common/Endpoints");
+const Endpoints = require("./Common/Endpoints");
 const axios = require('axios');
 const adapter = require('axios/lib/adapters/http');
 var parseString = require('xml2js').parseString;
@@ -53,7 +53,7 @@ module.exports = class VelocityClient {
                 </soap:Body>
             </soap:Envelope>`;
 
-        var response;
+        var response = null;
 
         await axios.post(`${this.url}v2/cartaoprotegido.asmx`, body, {headers: {'Content-Type': 'text/xml'}})
             .then(res => {
@@ -67,7 +67,6 @@ module.exports = class VelocityClient {
                 });
             })
             .catch(error => {
-                console.log(error);
                 response = {httpStatus: error.response.status, ...error.response}
             });
 
@@ -110,7 +109,7 @@ module.exports = class VelocityClient {
                 </soap:Body>
             </soap:Envelope>`;
 
-        var response;
+        var response = null;
 
         await axios.post(`${this.url}v2/cartaoprotegido.asmx`, body, {headers: {'Content-Type': 'text/xml'}})
             .then(res => {
@@ -124,7 +123,6 @@ module.exports = class VelocityClient {
                 });
             })
             .catch(error => {
-                console.log(error);
                 response = {httpStatus: error.response.status, ...error.response}
             });
 
@@ -162,7 +160,7 @@ module.exports = class VelocityClient {
                 </soap:Body>
             </soap:Envelope>`;
 
-        var response;
+        var response = null;
 
         await axios.post(`${this.url}v2/cartaoprotegido.asmx`, body, {headers: {'Content-Type': 'text/xml'}})
             .then(res => {
@@ -176,7 +174,6 @@ module.exports = class VelocityClient {
                 });
             })
             .catch(error => {
-                console.log(error);
                 response = {httpStatus: error.response.status, ...error.response}
             });
 

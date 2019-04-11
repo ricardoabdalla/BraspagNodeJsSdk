@@ -1,4 +1,4 @@
-const CartaoProtegidoClient = require('../src/CartaoProtegido/CartaoProtegidoClient');
+const CartaoProtegidoClient = require('../src/CartaoProtegidoClient');
 const uuid = require('uuid/v1');
 
 describe('CartaoProtegidoTests', () => {
