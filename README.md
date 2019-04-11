@@ -58,6 +58,8 @@ Para criar uma transação utilizando cartão de crédito:
 
 ```javascript
 /* Criação do Cliente Pagador */
+const PagadorClient = require('braspag-nodejs-sdk').PagadorClient;
+
 const pagadorClient = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -100,6 +102,8 @@ Para criar uma transação utilizando cartão de débito:
 
 ```javascript
 /* Criação do Cliente Pagador */
+const PagadorClient = require('braspag-nodejs-sdk').PagadorClient;
+
 const pagadorClient = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -144,6 +148,8 @@ Para criar uma transação utilizando boleto registrado:
 
 ```javascript
 /* Criação do Cliente Pagador */
+const PagadorClient = require('braspag-nodejs-sdk').PagadorClient;
+
 const pagadorClient = new PagadorClient({
             env: 'sandbox',
             credentials: {
@@ -185,6 +191,8 @@ Para salvar um cartão de crédito em um cofre PCI:
 
 ```javascript
 /* Criação do Cliente Cartão Protegido */
+const CartaoProtegidoClient = require('braspag-nodejs-sdk').CartaoProtegidoClient;
+
 const cartaoProtegidoClient = new CartaoProtegidoClient({
             env: 'sandbox',
             credentials: {
@@ -209,6 +217,8 @@ Para obter os dados de um cartão de crédito previamente salvo em cofre PCI:
 
 ```javascript
 /* Criação do Cliente Cartão Protegido */
+const CartaoProtegidoClient = require('braspag-nodejs-sdk').CartaoProtegidoClient;
+
 const cartaoProtegidoClient = new CartaoProtegidoClient({
             env: 'sandbox',
             credentials: {
@@ -241,6 +251,8 @@ let authResponse = await authClient.createAccessToken({
 });
 
 /* Criação do Cliente Velocity */
+const VelocityClient = require('braspag-nodejs-sdk').VelocityClient;
+
 const client = new VelocityClient({
     env: 'sandbox',
     credentials: {
