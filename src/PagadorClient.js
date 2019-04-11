@@ -1,4 +1,4 @@
-const Endpoints = require('../Common/Endpoints');
+const Endpoints = require('./Common/Endpoints');
 const axios = require('axios');
 const uuid = require('uuid/v1');
 
@@ -50,7 +50,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.post(`${this.url}v2/sales`, request, {headers})
             .then(res => {
@@ -58,7 +58,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status, ...error.response}
-            })
+            });
             
         return response;
     }
@@ -92,7 +92,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/sales/${request.PaymentId}/capture?amount=${typeof request.Amount === 'undefined' || request.Amount === null ? 0 : request.Amount}`, {}, {headers})
             .then(res => {
@@ -100,7 +100,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status, ...error.response}
-            })
+            });
             
         return response;
     }
@@ -134,7 +134,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/sales/${request.PaymentId}/void`, {query: request.Amount}, {headers})
             .then(res => {
@@ -142,7 +142,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status, ...error.response}
-            })
+            });
             
         return response;
     }
@@ -176,7 +176,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.get(`${this.urlQuery}v2/sales/${paymentId}/`, {headers})
             .then(res => {
@@ -184,7 +184,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status, ...error.response}
-            })
+            });
             
         return response;
     }
@@ -221,7 +221,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.urlQuery}v2/recurrentpayment/${recurrentPaymentId}/customer`, customer, {headers})
             .then(res => {
@@ -229,8 +229,8 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
-            
+            });
+
         return response;
     }
 
@@ -266,7 +266,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/enddate`, JSON.stringify(endDate), {headers})
             .then(res => {
@@ -274,7 +274,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -311,7 +311,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/interval`, interval, {headers})
             .then(res => {
@@ -319,7 +319,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -356,7 +356,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/recurrencyDay`, day, {headers})
             .then(res => {
@@ -364,7 +364,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -401,7 +401,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/amount`, amount, {headers})
             .then(res => {
@@ -409,7 +409,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -446,7 +446,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/nextPaymentDate`, JSON.stringify(nextPaymentDate), {headers})
             .then(res => {
@@ -454,7 +454,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -491,7 +491,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/payment`, payment, {headers})
             .then(res => {
@@ -499,7 +499,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -533,7 +533,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/deactivate`, {}, {headers})
             .then(res => {
@@ -541,7 +541,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -575,7 +575,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.put(`${this.url}v2/recurrentpayment/${recurrentPaymentId}/reactivate`, {}, {headers})
             .then(res => {
@@ -583,7 +583,7 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
@@ -617,7 +617,7 @@ module.exports = class PagadorClient {
             'cache-control': 'no-cache'
         };
 
-        var response;
+        var response = null;
 
         await axios.get(`${this.urlQuery}v2/recurrentpayment/${recurrentPaymentId}`, {headers})
             .then(res => {
@@ -625,8 +625,8 @@ module.exports = class PagadorClient {
             })
             .catch(error => {
                 response = {httpStatus: error.response.status}
-            })
+            });
             
         return response;
     }
-}
+};

@@ -35,7 +35,8 @@ Caso já possua um arquivo `package.json`, adicione a seguinte dependência ao s
 
 ```
 "dependencies": {
-    "braspag-nodejs-sdk": "*",
+    "braspag-nodejs-sdk": "*"
+}
 ```
 
 Com a dependência adicionada ao `package.json`, execute o comando:

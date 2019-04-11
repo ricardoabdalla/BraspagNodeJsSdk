@@ -1,4 +1,4 @@
-const Endpoints = require("../Common/Endpoints");
+const Endpoints = require("./Common/Endpoints");
 const axios = require('axios');
 const adapter = require('axios/lib/adapters/http');
 const uuid = require('uuid/v1');
@@ -58,7 +58,6 @@ module.exports = class VelocityClient {
                 response = {httpStatus: res.status, ...res.data}
             })
             .catch(error => {
-                console.log(error);
                 response = {httpStatus: error.response.status, ...error.response}
             });
             
