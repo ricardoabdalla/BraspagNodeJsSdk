@@ -91,5 +91,7 @@ src/\.DS_Store
 src/Common/\.DS_Store
 
 \.DS_Store
+\.idea
+\.vscode
 
 # End of https://www.gitignore.io/api/node
