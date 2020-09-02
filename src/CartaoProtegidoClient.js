@@ -4,7 +4,7 @@ const adapter = require('axios/lib/adapters/http');
 var parseString = require('xml2js').parseString;
 const uuid = require('uuid/v1');
 
-module.exports = class VelocityClient {
+module.exports = class CartaoProtegidoClient {
     constructor(options) {
         axios.defaults.adapter = adapter;
 
