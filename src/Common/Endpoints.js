@@ -9,7 +9,7 @@ module.exports = {
 
     CartaoProtegidoSandbox: "https://cartaoprotegidosandbox.braspag.com.br/",
 
-    CartaoProtegidoProduction: "https://cartaoprotegido.braspag.com.br/",
+    CartaoProtegidoProduction: "https://cartaoprotegido.braspag.com.br/services/",
 
     VelocityApiSandbox: "https://velocitysandbox.braspag.com.br/",
 
